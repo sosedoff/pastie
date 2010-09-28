@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+
+lib = File.expand_path(File.dirname(__FILE__) + '/../lib')
+$LOAD_PATH.unshift(lib) if File.directory?(lib) && !$LOAD_PATH.include?(lib)
+
+require 'pastie'
+require 'pastie/console'
+
+unless ARGV.empty?
+  ARGV.each do |f|
+    path = File.expand_path(f)
+    if File.exists?(path)
+      p = Pastie.create(File.read(path))
+      unless p.nil?
+        puts p.link.green
+      else
+        puts "Error: Cant create paste at this moment.".red
+      end
+    else
+      puts "Error: \"#{path}\" does not exist!".red
+    end
+  end
+else
+  puts "Error: Input file(s) required".red
+end
+

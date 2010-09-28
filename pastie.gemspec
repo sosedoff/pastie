@@ -1,5 +1,5 @@
 Gem::Specification.new do |s|
-  s.name = "pastie"
+  s.name = "pastie-api"
   s.version = "0.1"
   s.date = "2010-09-28"
   s.description = "Pastie.org simplified API with terminal access"

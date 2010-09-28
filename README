@@ -8,7 +8,7 @@ All pastes are private by default.
 == Usage
 
 require 'rubygems'
-require 'pastie'
+require 'pastie-api'
 
 # Create a new private paste
 p = Pastie.create('Test string')

@@ -3,8 +3,8 @@
 lib = File.expand_path(File.dirname(__FILE__) + '/../lib')
 $LOAD_PATH.unshift(lib) if File.directory?(lib) && !$LOAD_PATH.include?(lib)
 
-require 'pastie'
-require 'pastie/console'
+require 'pastie-api'
+require 'pastie-api/console'
 
 unless ARGV.empty?
   ARGV.each do |f|

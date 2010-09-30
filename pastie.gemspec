@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name = "pastie-api"
-  s.version = "0.1"
-  s.date = "2010-09-28"
+  s.version = "0.1.1"
+  s.date = "2010-09-30"
   s.description = "Pastie.org simplified API with terminal access"
   s.summary = "Pastie.org simplified API with terminal access"
   s.authors = ["Dan Sosedoff"]
@@ -11,11 +11,11 @@ Gem::Specification.new do |s|
   # = MANIFEST =
   s.files = %w[
     bin/pastie
-    lib/pastie.rb
-    lib/pastie/pastie.rb
-    lib/pastie/request.rb
-    lib/pastie/paste.rb
-    lib/pastie/console.rb
+    lib/pastie-api.rb
+    lib/pastie-api/pastie.rb
+    lib/pastie-api/request.rb
+    lib/pastie-api/paste.rb
+    lib/pastie-api/console.rb
   ]
   # = MANIFEST =
 

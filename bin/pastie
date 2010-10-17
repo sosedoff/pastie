@@ -3,24 +3,44 @@
 lib = File.expand_path(File.dirname(__FILE__) + '/../lib')
 $LOAD_PATH.unshift(lib) if File.directory?(lib) && !$LOAD_PATH.include?(lib)
 
+require 'optparse'
 require 'pastie-api'
 require 'pastie-api/console'
+require 'pastie-api/history'
 
-unless ARGV.empty?
-  ARGV.each do |f|
-    path = File.expand_path(f)
-    if File.exists?(path)
-      p = Pastie.create(File.read(path))
-      unless p.nil?
-        puts p.link.green
-      else
-        puts "Error: Cant create paste at this moment.".red
-      end
-    else
-      puts "Error: \"#{path}\" does not exist!".red
-    end
-  end
-else
-  puts "Error: Input file(s) required".red
+history = Pastie::History.new
+options = {:private => true}
+
+optparse = OptionParser.new do |opts|
+  opts.banner = "Usage: pastie [options] file1 file2 ... fileN"
+  opts.on('-i', '--info', 'Display this information.') { puts opts ; exit }
+  opts.on('-p', '--public', 'Paste files as public.') { options[:private] = false }
+  opts.on('-h', '--history', 'Show pastes history.') { history.print ; exit }
+  opts.on('-c', '--clear', 'Clear your pastes history.') { history.flush ; history.save ; exit }
 end
 
+begin
+  optparse.parse!
+  unless ARGV.empty?
+    ARGV.each do |f|
+      path = File.expand_path(f)
+      if File.exists?(path)
+        p = Pastie.create(File.read(path), options[:private])
+        unless p.nil?
+          history.add(p.link)
+          puts p.link.green
+        else
+          puts "Error: Cant create paste at this moment.".red
+        end
+        history.save
+      else
+        puts "Error: \"#{path}\" does not exist!".red
+      end
+    end
+  else
+    puts optparse
+  end
+rescue OptionParser::InvalidOption, OptionParser::MissingArgument
+  puts optparse
+  exit
+end

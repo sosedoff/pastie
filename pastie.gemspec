@@ -1,9 +1,9 @@
 Gem::Specification.new do |s|
   s.name = "pastie-api"
-  s.version = "0.1.1"
-  s.date = "2010-09-30"
-  s.description = "Pastie.org simplified API with terminal access"
-  s.summary = "Pastie.org simplified API with terminal access"
+  s.version = "0.2.0"
+  s.date = "2010-10-17"
+  s.description = "Simple API and shell access to Pastie.org"
+  s.summary = "Simple Pastie.org API"
   s.authors = ["Dan Sosedoff"]
   s.email = "dan.sosedoff@gmail.com"
   s.homepage = "http://github.com/sosedoff/pastie"
@@ -16,6 +16,7 @@ Gem::Specification.new do |s|
     lib/pastie-api/request.rb
     lib/pastie-api/paste.rb
     lib/pastie-api/console.rb
+    lib/pastie-api/history.rb
   ]
   # = MANIFEST =
 

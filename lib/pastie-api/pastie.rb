@@ -1,6 +1,6 @@
 module Pastie
   BASE_URL = 'http://pastie.org'
-
+  
   # Gets existing paste
   def self.get(id)
     id = id.to_s

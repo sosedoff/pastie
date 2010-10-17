@@ -4,6 +4,7 @@ Pastie gem is a simplified API to communicate with Pastie.org website.
 It is based on HTML processing since pastie.org does not provide any API access.
 This gem comes as a library and executable file.
 All pastes are private by default.
+History available from version 0.2.0.
 
 == Usage
 
@@ -28,4 +29,8 @@ p = Pastie.get('abcdefabcdef') # find by paste's private code
 
 == Command-line Usage
 
-$ pastie /path/to/file1 /path/to/file2 ...
+Usage: pastie [options] file1 file2 ... fileN
+    -i, --info                       Display this information.
+    -p, --public                     Paste files as public.
+    -h, --history                    Show pastes history.
+    -c, --clear                      Clear your pastes history.

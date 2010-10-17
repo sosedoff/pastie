@@ -5,7 +5,7 @@ module Pastie
 
     # Initializes a pastie from server html response
     def initialize(html)
-      url = html.scan(/http:\/\/pastie.org\/([\d]{1,}).txt(\?key=([A-Za-z\d]{1,}))?/)
+      url = html.scan(/http:\/\/pastie.org\/pastes\/([\d]{1,})\/text(\?key=([A-Za-z\d]{1,}))?/)
       unless url.nil?
         url.flatten!
         @id = url[0] ; @key = url[2]
@@ -17,7 +17,7 @@ module Pastie
 
     # Returns direct link to paste contents
     def raw_link
-      BASE_URL + "/#{@id}.txt" + (private? ? "?key=#{@key}" : '')
+      BASE_URL + "/pastes/#{@id}/text" + (private? ? "?key=#{@key}" : '')
     end
 
     # Return direct link to paste page

@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name = "pastie-api"
-  s.version = "0.2.0"
-  s.date = "2010-10-17"
+  s.version = "0.2.1"
+  s.date = "2010-10-19"
   s.description = "Simple API and shell access to Pastie.org"
   s.summary = "Simple Pastie.org API"
   s.authors = ["Dan Sosedoff"]

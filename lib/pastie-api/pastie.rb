@@ -10,13 +10,14 @@ module Pastie
   end
 
   # Creates a new paste
-  def self.create(content, private=true)
+  def self.create(content, private=true, language=nil)
     params = {
       "paste[body]" => content.to_s,
       "paste[authorization]" => "burger",
       "paste[restricted]" => "1"
     }
     params["paste[restricted]"] = "0" unless private
+    params["paste[parser_id]"] = parser_id(language)
     resp = Net::HTTP.post_form(URI.parse(BASE_URL + "/pastes"), params)
     if resp.kind_of?(Net::HTTPFound)
       paste_url = resp.body.scan(/<a href="(.*)">/)[0][0]
@@ -25,4 +26,16 @@ module Pastie
       raise "Cannot create paste!"
     end
   end
+  
+  def self.parser_id(language=nil)
+    return "6" if language.nil?  # Default to plain text
+    if @parser.nil?
+      @parser = {}
+      %w{objective_c action_script ruby rails diff plain c css java java_script html erb bash sql php python n_a perl yaml c_sharp}.each_with_index do |lang, ii|
+        @parser[lang] = (ii+1).to_s
+      end
+    end
+    @parser[language.to_s] || @parser[:plain] 
+  end
+
 end

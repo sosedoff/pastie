@@ -5,6 +5,7 @@ It is based on HTML processing since pastie.org does not provide any API access.
 This gem comes as a library and executable file.
 All pastes are private by default.
 History tracking feature is available from version 0.2.0.
+Sharing feature is available from version 0.2.2.
 
 == Installation
 
@@ -36,10 +37,11 @@ History tracking feature is available from version 0.2.0.
   Usage: pastie [options] file1 file2 ... fileN
     -i, --info                       Display this information.
     -p, --public                     Paste files as public.
+    -s, --share EMAIL                Share pastes with email
     -h, --history                    Show pastes history.
     -c, --clear                      Clear your pastes history.
 
 == Authors & Contributors
 
-Dan Sosedoff, author, github.com/sosedoff
-Barry Hess, contributor, github.com/bjhess
+* Dan Sosedoff, author, http://github.com/sosedoff
+* Barry Hess, contributor, http://github.com/bjhess

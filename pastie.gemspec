@@ -1,15 +1,16 @@
 Gem::Specification.new do |s|
   s.name = "pastie-api"
-  s.version = "0.2.1"
-  s.date = "2010-10-19"
+  s.version = "0.2.2"
+  s.date = "2011-01-08"
   s.description = "Simple API and shell access to Pastie.org"
   s.summary = "Simple Pastie.org API"
   s.authors = ["Dan Sosedoff"]
   s.email = "dan.sosedoff@gmail.com"
   s.homepage = "http://github.com/sosedoff/pastie"
 
-  # = MANIFEST =
   s.files = %w[
+    .gitignore,
+    README.rdoc,
     bin/pastie
     lib/pastie-api.rb
     lib/pastie-api/pastie.rb
@@ -17,11 +18,13 @@ Gem::Specification.new do |s|
     lib/pastie-api/paste.rb
     lib/pastie-api/console.rb
     lib/pastie-api/history.rb
+    lib/pastie-api/share.rb
   ]
-  # = MANIFEST =
 
   s.executables = ["pastie"]
   s.default_executable = "pastie"
+  
+  s.add_dependency('mail','>1.0')
 
   s.has_rdoc = true
   s.rubygems_version = '1.3.7'

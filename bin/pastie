@@ -3,30 +3,41 @@
 lib = File.expand_path(File.dirname(__FILE__) + '/../lib')
 $LOAD_PATH.unshift(lib) if File.directory?(lib) && !$LOAD_PATH.include?(lib)
 
+require 'rubygems'
+require 'pony'
 require 'optparse'
+require 'yaml'
 require 'pastie-api'
 require 'pastie-api/console'
 require 'pastie-api/history'
+require 'pastie-api/share'
+
+include Pastie::Console
+include Pastie::Share
 
 history = Pastie::History.new
 options = {:private => true}
+links = []
 
 optparse = OptionParser.new do |opts|
   opts.banner = "Usage: pastie [options] file1 file2 ... fileN"
   opts.on('-i', '--info', 'Display this information.') { puts opts ; exit }
   opts.on('-p', '--public', 'Paste files as public.') { options[:private] = false }
+  opts.on('-s', '--share EMAIL', 'Share pastes with email') { |v| options[:share] = v }
   opts.on('-h', '--history', 'Show pastes history.') { history.print ; exit }
   opts.on('-c', '--clear', 'Clear your pastes history.') { history.flush ; history.save ; exit }
 end
 
 begin
   optparse.parse!
+    
   unless ARGV.empty?
     ARGV.each do |f|
       path = File.expand_path(f)
       if File.exists?(path)
         p = Pastie.create(File.read(path), options[:private])
         unless p.nil?
+          links << p.link
           history.add(p.link)
           puts p.link.green
         else
@@ -36,6 +47,11 @@ begin
       else
         puts "Error: \"#{path}\" does not exist!".red
       end
+    end
+    
+    ARGV.clear
+    if options[:share] && !links.empty?
+      share(links, options[:share])
     end
   else
     puts optparse

@@ -12,13 +12,9 @@ module Pastie
     # Load history
     def load
       if File.exists?(@path) && File.readable?(@path)
-        File.open(@path).readlines("\r\n").each do |l|
-          @links << l.strip
-        end
+        @links = File.open(@path).readlines("\r\n").collect { |l| l.strip }
       else
-        if File.writable?(File.dirname(@path))
-          File.open(@path, 'w').close
-        end
+        File.open(@path, 'w').close if File.writable?(File.dirname(@path))
       end
     end
     

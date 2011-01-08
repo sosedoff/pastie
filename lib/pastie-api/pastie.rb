@@ -14,9 +14,8 @@ module Pastie
     params = {
       "paste[body]" => content.to_s,
       "paste[authorization]" => "burger",
-      "paste[restricted]" => "1"
+      "paste[restricted]" => private ? "1" : "0"
     }
-    params["paste[restricted]"] = "0" unless private
     params["paste[parser_id]"] = parser_id(language)
     resp = Net::HTTP.post_form(URI.parse(BASE_URL + "/pastes"), params)
     if resp.kind_of?(Net::HTTPFound)
@@ -27,6 +26,7 @@ module Pastie
     end
   end
   
+  # Get language ID by its name
   def self.parser_id(language=nil)
     return "6" if language.nil?  # Default to plain text
     if @parser.nil?
@@ -37,5 +37,4 @@ module Pastie
     end
     @parser[language.to_s] || @parser[:plain] 
   end
-
 end

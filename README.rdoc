@@ -1,0 +1,45 @@
+= Pastie - Simple API wrapper to communicate with Pastie.org website
+
+Pastie gem is a simplified API to communicate with Pastie.org website.
+It is based on HTML processing since pastie.org does not provide any API access.
+This gem comes as a library and executable file.
+All pastes are private by default.
+History tracking feature is available from version 0.2.0.
+
+== Installation
+
+  gem install pastie-api
+  
+== Usage: API
+
+  require 'rubygems'
+  require 'pastie-api'
+
+  # Create a new private paste
+  p = Pastie.create('Test string')
+
+  # Create a new public paste
+  p = Pastie.create('Hello!', false)
+
+  # View paste details
+  puts "Paste ID: #{p.id}"
+  puts "Paste Key: #{p.key}"
+  puts "URL: #{p.link}"
+  puts "Raw link: #{p.raw_link}"
+
+  # Find existing paste
+  p = Pastie.get(1234567) # find by paste's ID
+  p = Pastie.get('abcdefabcdef') # find by paste's private code
+
+== Usage: Terminal
+
+  Usage: pastie [options] file1 file2 ... fileN
+    -i, --info                       Display this information.
+    -p, --public                     Paste files as public.
+    -h, --history                    Show pastes history.
+    -c, --clear                      Clear your pastes history.
+
+== Authors & Contributors
+
+Dan Sosedoff, author, github.com/sosedoff
+Barry Hess, contributor, github.com/bjhess

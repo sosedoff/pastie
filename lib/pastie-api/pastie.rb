@@ -28,7 +28,6 @@ module Pastie
   
   # Get language ID by its name
   def self.parser_id(language=nil)
-    return "6" if language.nil?  # Default to plain text
     if @parser.nil?
       @parser = {}
       %w{objective_c action_script ruby rails diff plain c css java java_script html erb bash sql php python n_a perl yaml c_sharp}.each_with_index do |lang, ii|

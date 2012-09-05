@@ -1,11 +1,12 @@
 = Pastie - Simple API wrapper to communicate with Pastie.org website
 
-Pastie gem is a simplified API to communicate with Pastie.org website.
-It is based on HTML processing since pastie.org does not provide any API access.
-This gem comes as a library and executable file.
-All pastes are private by default.
-History tracking feature is available from version 0.2.0.
-Sharing feature is available from version 0.2.2.
+* Pastie gem is a simplified API to communicate with Pastie.org website.
+* It is based on HTML processing since pastie.org does not provide any API access.
+* This gem comes as a library and executable file.
+* All pastes are private by default.
+* History tracking feature is available from version 0.2.0.
+* Sharing feature is available from version 0.2.2.
+* Language parser option is available from version 0.2.3.
 
 == Installation
 
@@ -40,6 +41,8 @@ Sharing feature is available from version 0.2.2.
     -s, --share EMAIL                Share pastes with email
     -h, --history                    Show pastes history.
     -c, --clear                      Clear your pastes history.
+    -l, --language LANGUAGE          Select a lanaguage parser for syntax highlighting. 
+                                     Ruby is selected by default.
 
 == Authors & Contributors
 

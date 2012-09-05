@@ -16,7 +16,7 @@ include Pastie::Console
 include Pastie::Share
 
 history = Pastie::History.new
-options = {:private => true}
+options = {:private => true, :language => 'ruby'}
 links = []
 
 optparse = OptionParser.new do |opts|
@@ -26,6 +26,7 @@ optparse = OptionParser.new do |opts|
   opts.on('-s', '--share EMAIL', 'Share pastes with email') { |v| options[:share] = v }
   opts.on('-h', '--history', 'Show pastes history.') { history.print ; exit }
   opts.on('-c', '--clear', 'Clear your pastes history.') { history.flush ; history.save ; exit }
+  opts.on('-l', '--language LANGUAGE', 'Parser to be used') { |v| options[:language] = v} 
 end
 
 begin
@@ -35,7 +36,7 @@ begin
     ARGV.each do |f|
       path = File.expand_path(f)
       if File.exists?(path)
-        p = Pastie.create(File.read(path), options[:private])
+        p = Pastie.create(File.read(path), options[:private], options[:language])
         unless p.nil?
           links << p.link
           history.add(p.link)
